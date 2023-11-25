@@ -20,15 +20,15 @@ void SegTree::update(int noAtual, int inicioIntervalo, int fimIntervalo, int ind
 		delete transformacoes[noAtual];
 		transformacoes[noAtual] = novoValor;
 	} else {
-		int mid = (inicioIntervalo + fimIntervalo) / 2;
+		int meio = (inicioIntervalo + fimIntervalo) / 2;
 		int filhoEsquerda = 2 * noAtual;
 		int filhoDireita = 2 * noAtual + 1;
 
 		// Atualizar recursivamente os filhos
-		if (indice <= mid) {
-			update(filhoEsquerda, inicioIntervalo, mid, indice, novoValor);
+		if (indice <= meio) {
+			update(filhoEsquerda, inicioIntervalo, meio, indice, novoValor);
 		} else {
-			update(filhoDireita, mid + 1, fimIntervalo, indice, novoValor);
+			update(filhoDireita, meio + 1, fimIntervalo, indice, novoValor);
 		}
 
 		// Atualizar o nó atual com a soma dos filhos
