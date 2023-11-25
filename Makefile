@@ -1,8 +1,8 @@
 #---------------------------------------------------------------------
 # Arquivo	: Makefile
-# Conteúdo	: compilar o analisador de coloração gulosa
+# Conteúdo	: compilar o calculador de tranformações lineares
 # Autor		: Guilherme Novais de Souza
-# Histórico	: 2023-11-05 arquivo criado
+# Histórico	: 2023-11-25 arquivo criado
 #---------------------------------------------------------------------
 # Opções	: make all - compila tudo e executa o exemplo
 #			: make clean - remove objetos e executável
@@ -16,11 +16,11 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/matriz.o $(OBJ)/lista.o $(OBJ)/sorting.o $(OBJ)/vertice.o $(OBJ)/main.o
-HDRS = $(INC)/grafo.hpp $(INC)/lista.hpp $(INC)/sorting.hpp $(INC)/vertice.hpp
+OBJS = $(OBJ)/matriz.o $(OBJ)/jogo.o $(OBJ)/seg_tree.o $(OBJ)/vetor.o $(OBJ)/main.o
+HDRS = $(INC)/matriz.hpp $(INC)/jogo.hpp $(INC)/seg_tree.hpp $(INC)/vetor.hpp
 CFLAGS = -c -g -I $(INC)
 
-EXE = $(BIN)/tp2.out
+EXE = $(BIN)/tp3.out
 
 mkdir:
 	[ -d obj ] || mkdir obj
@@ -31,17 +31,17 @@ all: mkdir $(EXE)
 $(EXE): $(OBJS)
 	$(CC) -o $(EXE) $(OBJS) $(LIBS)
 
-$(OBJ)/grafo.o: $(HDRS) $(SRC)/grafo.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/grafo.o $(SRC)/grafo.cpp
+$(OBJ)/matriz.o: $(HDRS) $(SRC)/matriz.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/matriz.o $(SRC)/matriz.cpp
 
-$(OBJ)/lista.o: $(HDRS) $(SRC)/lista.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/lista.o $(SRC)/lista.cpp
+$(OBJ)/jogo.o: $(HDRS) $(SRC)/jogo.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/jogo.o $(SRC)/jogo.cpp
 
-$(OBJ)/sorting.o: $(HDRS) $(SRC)/sorting.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/sorting.o $(SRC)/sorting.cpp
+$(OBJ)/seg_tree.o: $(HDRS) $(SRC)/seg_tree.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/seg_tree.o $(SRC)/seg_tree.cpp
 
-$(OBJ)/vertice.o: $(HDRS) $(SRC)/vertice.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/vertice.o $(SRC)/vertice.cpp
+$(OBJ)/vetor.o: $(HDRS) $(SRC)/vetor.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/vetor.o $(SRC)/vetor.cpp
 
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 
@@ -50,8 +50,8 @@ clean:
 	rm -f $(EXE) $(OBJS) gmon.out
 
 run: all
-	./bin/tp2.out
+	./bin/tp3.out
 
 test: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./bin/tp2.out < teste.txt
-	gdb ./bin/tp2.out
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./bin/tp3.out < teste.txt
+	gdb ./bin/tp3.out
