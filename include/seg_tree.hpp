@@ -7,8 +7,8 @@ class SegTree {
 	private:
 		Matriz** transformacoes;
 		unsigned int tamanho;
-		void update(int noAtual, int inicioIntervalo, int fimIntervalo, int indice, Matriz* novoValor);
-		Matriz* query(int noAtual, int inicioIntervalo, int fimIntervalo, int inicioBusca, int fimBusca);
+		void update(unsigned int noAtual, unsigned int inicioIntervalo, unsigned int fimIntervalo, unsigned int indice, Matriz* novoValor);
+		Matriz* query(unsigned int noAtual, unsigned int inicioIntervalo, unsigned int fimIntervalo, unsigned int inicioBusca, unsigned int fimBusca);
 	public:
 		SegTree(unsigned int qtdInstantes);
 		~SegTree();

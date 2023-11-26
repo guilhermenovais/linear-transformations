@@ -14,33 +14,30 @@ SegTree::~SegTree() {
 	delete[] transformacoes;
 }
 
-void SegTree::update(int noAtual, int inicioIntervalo, int fimIntervalo, int indice, Matriz* novoValor) {
-	if (inicioIntervalo == fimIntervalo) {
-		// Nó folha
+void SegTree::update(unsigned int noAtual, unsigned int inicioIntervalo, unsigned int fimIntervalo, unsigned int indice, Matriz* novoValor) {
+	if(indice < inicioIntervalo || indice > fimIntervalo) return;
+
+	if(inicioIntervalo == fimIntervalo) {
 		delete transformacoes[noAtual];
 		transformacoes[noAtual] = novoValor;
-	} else {
-		int meio = (inicioIntervalo + fimIntervalo) / 2;
-		int filhoEsquerda = 2 * noAtual;
-		int filhoDireita = 2 * noAtual + 1;
-
-		// Atualizar recursivamente os filhos
-		if (indice <= meio) {
-			update(filhoEsquerda, inicioIntervalo, meio, indice, novoValor);
-		} else {
-			update(filhoDireita, meio + 1, fimIntervalo, indice, novoValor);
-		}
-
-		// Atualizar o nó atual com a soma dos filhos
-		Matriz::calculaProduto(transformacoes[filhoEsquerda], transformacoes[filhoDireita], transformacoes[noAtual]);
+		return;
 	}
+
+	unsigned int meio = (inicioIntervalo + fimIntervalo) / 2;
+	unsigned int filhoEsqueda = 2 * noAtual;
+	unsigned int filhoDireita = 2 * noAtual + 1;
+	
+	update(filhoEsqueda, inicioIntervalo, meio, indice, novoValor);
+	update(filhoDireita, meio + 1, fimIntervalo, indice, novoValor);
+
+	Matriz::calculaProduto(transformacoes[filhoEsqueda], transformacoes[filhoDireita], transformacoes[noAtual]);
 }
 
 void SegTree::atualizaTransformacao(unsigned int instante, Matriz* transformacao) {
 	update(1, 0, tamanho - 1, instante, transformacao);
 }
 
-Matriz* SegTree::query(int noAtual, int inicioIntervalo, int fimIntervalo, int inicioBusca, int fimBusca) {
+Matriz* SegTree::query(unsigned int noAtual, unsigned int inicioIntervalo, unsigned int fimIntervalo, unsigned int inicioBusca, unsigned int fimBusca) {
 	if (fimBusca < inicioIntervalo || fimIntervalo < inicioBusca) {
 		// Intervalo completamente fora da consulta
 		return new Matriz(1, 0, 0, 1);
@@ -50,9 +47,9 @@ Matriz* SegTree::query(int noAtual, int inicioIntervalo, int fimIntervalo, int i
 		return new Matriz(transformacoes[noAtual]->getA00(), transformacoes[noAtual]->getA01(), transformacoes[noAtual]->getA10(), transformacoes[noAtual]->getA11());
 	}
 
-	int meio = (inicioIntervalo + fimIntervalo) / 2;
-	int filhoEsquerda = 2 * noAtual;
-	int filhoDireita = 2 * noAtual + 1;
+	unsigned int meio = (inicioIntervalo + fimIntervalo) / 2;
+	unsigned int filhoEsquerda = 2 * noAtual;
+	unsigned int filhoDireita = 2 * noAtual + 1;
 
 	// Recursivamente buscar nos filhos
 	Matriz* matrizEsquerda = query(filhoEsquerda, inicioIntervalo, meio, inicioBusca, fimBusca);
