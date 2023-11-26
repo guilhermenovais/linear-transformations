@@ -24,17 +24,17 @@ void SegTree::update(unsigned int noAtual, unsigned int inicioIntervalo, unsigne
 	}
 
 	unsigned int meio = (inicioIntervalo + fimIntervalo) / 2;
-	unsigned int filhoEsqueda = 2 * noAtual;
+	unsigned int filhoEsquerda = 2 * noAtual;
 	unsigned int filhoDireita = 2 * noAtual + 1;
 	
-	update(filhoEsqueda, inicioIntervalo, meio, indice, novoValor);
+	update(filhoEsquerda, inicioIntervalo, meio, indice, novoValor);
 	update(filhoDireita, meio + 1, fimIntervalo, indice, novoValor);
 
-	Matriz::calculaProduto(transformacoes[filhoEsqueda], transformacoes[filhoDireita], transformacoes[noAtual]);
+	Matriz::calculaProduto(transformacoes[filhoEsquerda], transformacoes[filhoDireita], transformacoes[noAtual]);
 }
 
 void SegTree::atualizaTransformacao(unsigned int instante, Matriz* transformacao) {
-	update(1, 0, tamanho - 1, instante, transformacao);
+	update(1, 0, tamanho / 4 - 1, instante, transformacao);
 }
 
 Matriz* SegTree::query(unsigned int noAtual, unsigned int inicioIntervalo, unsigned int fimIntervalo, unsigned int inicioBusca, unsigned int fimBusca) {
@@ -65,5 +65,5 @@ Matriz* SegTree::query(unsigned int noAtual, unsigned int inicioIntervalo, unsig
 }
 
 Matriz* SegTree::getTransformacao(unsigned int inicio, unsigned int fim) {
-	return query(1, 0, tamanho - 1, inicio, fim);
+	return query(1, 0, tamanho / 4 - 1, inicio, fim);
 }
