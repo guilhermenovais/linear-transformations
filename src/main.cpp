@@ -37,7 +37,7 @@ int main (int argc, char *argv[]) {
 			unsigned int y = std::stoi(entrada);
 			Vetor* vetor = new Vetor(x, y);
 			jogo.consulta(nascimento, morte, vetor);
-			std::cout << vetor->getX() % 100000000 << " " << vetor->getY() % 100000000;
+			std::cout << vetor->getX() % 100000000 << " " << vetor->getY() % 100000000 << "\n";
 			delete vetor;
 		}
 	}
