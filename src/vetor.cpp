@@ -1,22 +1,22 @@
 #include "../include/vetor.hpp"
 
-Vetor::Vetor(unsigned int newX, unsigned int newY) {
+Vetor::Vetor(unsigned long int newX, unsigned long int newY) {
 	x = newX;
 	y = newY;
 }
 
-unsigned int Vetor::getX() {
+unsigned long int Vetor::getX() {
 	return x;
 }
 
-unsigned int Vetor::getY() {
+unsigned long int Vetor::getY() {
 	return y;
 }
 
-void Vetor::setX(unsigned int newX) {
+void Vetor::setX(unsigned long int newX) {
 	x = newX;
 }
 
-void Vetor::setY(unsigned int newY) {
+void Vetor::setY(unsigned long int newY) {
 	y = newY;
 }

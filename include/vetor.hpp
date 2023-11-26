@@ -3,13 +3,13 @@
 
 class Vetor {
 	private:
-		unsigned int x, y;
+		unsigned long int x, y;
 	public:
-		Vetor(unsigned int newX, unsigned int newY);
-		unsigned int getX();
-		unsigned int getY();
-		void setX(unsigned int newX);
-		void setY(unsigned int newY);
+		Vetor(unsigned long int newX, unsigned long int newY);
+		unsigned long int getX();
+		unsigned long int getY();
+		void setX(unsigned long int newX);
+		void setY(unsigned long int newY);
 };
 
 #endif // VETOR_HPP
