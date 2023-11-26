@@ -1,8 +1,8 @@
 #include "../include/vetor.hpp"
 
 Vetor::Vetor(unsigned long int newX, unsigned long int newY) {
-	x = newX;
-	y = newY;
+	x = newX % 100000000L;
+	y = newY % 100000000L;
 }
 
 unsigned long int Vetor::getX() {
@@ -14,9 +14,9 @@ unsigned long int Vetor::getY() {
 }
 
 void Vetor::setX(unsigned long int newX) {
-	x = newX;
+	x = newX % 100000000L;
 }
 
 void Vetor::setY(unsigned long int newY) {
-	y = newY;
+	y = newY % 100000000L;
 }
